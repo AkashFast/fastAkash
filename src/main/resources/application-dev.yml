@@ -1,0 +1,88 @@
+server:
+  port: 80
+  servlet:
+    session:
+      timeout: PT8H
+    context-path: /fastAkash
+
+logging:
+  level:
+     prism.akash.dataInteraction: debug
+
+spring:
+  application:
+    name: fastAkash
+  rabbitmq:
+     host:
+     port:
+     username:
+     password:
+     virtual-host: /
+     # 支持发布确认
+     publisher-confirms: true
+     # 支持发布返回
+     publisher-returns: true
+  redis:
+    database:
+    host:
+    port:
+    password:
+    jedis:
+      pool:
+        max-active: 200
+        max-idle: 10
+        min-idle: 0
+        max-wait: -1s
+    timeout: 10000s
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://
+    username:
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat,wall,log4j,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+
+coreConfig:
+
+akashConfig:
+  defaultFilePath: d:/         # 系统默认的文件上传地址
+  log_queue: akash_log       # 日志服务使用的队列名称
+  baidu:
+    appid:                  # 百度通用API
+    secret:
+  init:
+    enable: false     # 基础数据初始化 「关闭后系统启动时将不再自动对「数据库库表、字段」及「@schema逻辑层」进行数据同步」
+    baseInit: false  # 是否同步系统底层数据表 默认为「false」
+    history:  false  # 是否保存历史字段及表信息 默认为「false」 设置为「true」时，同步数据会对原有数据进行备份
+    tables:          # 在init.enable为「true」时,可以指定需要同步的数据表「多个间以,隔开」,为空视为同步指定数据库所有数据表
+  access:
+    enable: false  # 强制鉴权控制,测试时请根据需要打开[true]或关闭[false]本项
+    downloadType:  jpg,jpeg,png,gif # 非授权状态下可以下载的文件类型
+  oauth:
+    secureSSL: false # SSL加密链接访问控制,非https项目请使用false
+    cross:
+      urls:
+      enable: true                              # 跨域访问控制
+      domain:                                   # 指定跨域域名
+      httpOnly: false                           # 是否限制前台获取Cookie 「△ 建议在https路径下使用，如果需要Cookie,则设置为false」
+
+
