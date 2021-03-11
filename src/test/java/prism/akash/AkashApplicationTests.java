@@ -2,14 +2,12 @@ package prism.akash;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import prism.akash.container.BaseData;
 import prism.akash.controller.BaseController;
-import prism.akash.schema.business.DraftSchema;
 import prism.akash.tools.http.HTTPTool;
 import prism.akash.tools.reids.RedisTool;
 
@@ -29,17 +27,6 @@ public class AkashApplicationTests {
 
     @Autowired
     HTTPTool httpTool;
-
-    @Autowired
-    DraftSchema draftSchema;
-
-    @Test
-    public void tt(){
-        BaseData execute = new BaseData();
-        execute.put("q","同业机构监测目录");
-        execute.put("executeData", JSON.toJSONString(execute));
-        System.out.println(draftSchema.getTranslate(execute));
-    }
 
     // 使用SQL引擎进行数据查询
     //    @Test

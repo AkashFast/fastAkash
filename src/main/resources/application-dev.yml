@@ -23,7 +23,7 @@ spring:
      # 支持发布返回
      publisher-returns: true
   redis:
-    database:
+    database: 0
     host:
     port:
     password:
@@ -36,7 +36,7 @@ spring:
     timeout: 10000s
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://
+    url: jdbc:mysql://?characterEncoding=utf8&useSSL=false&serverTimezone=CTT&useInformationSchema=true&
     username:
     password:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -62,12 +62,16 @@ spring:
 
 
 coreConfig:
+  host:                 # 第三方数据接口地址
+  appId:                # 第三方数据接口APPID
+  appSecret:            # 第三方数据接口秘钥
+  loginSuccessUrl: http://youraddress/fastAkash
 
 akashConfig:
   defaultFilePath: d:/         # 系统默认的文件上传地址
-  log_queue: akash_log       # 日志服务使用的队列名称
+  log_queue: log_log       # 日志服务使用的队列名称
   baidu:
-    appid:                  # 百度通用API
+    appid:
     secret:
   init:
     enable: false     # 基础数据初始化 「关闭后系统启动时将不再自动对「数据库库表、字段」及「@schema逻辑层」进行数据同步」
@@ -80,9 +84,9 @@ akashConfig:
   oauth:
     secureSSL: false # SSL加密链接访问控制,非https项目请使用false
     cross:
-      urls:
+      urls: http://localhost:8000
       enable: true                              # 跨域访问控制
-      domain:                                   # 指定跨域域名
+      domain: localhost:8000                    # 指定跨域域名
       httpOnly: false                           # 是否限制前台获取Cookie 「△ 建议在https路径下使用，如果需要Cookie,则设置为false」
 
 
